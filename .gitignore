@@ -1,1 +1,7 @@
-**/logs
+.venv/
+.test_dependencies/
+
+**/luacov.stats.out
+**/luacov.report.out
+**/diii.log
+**/iii.log

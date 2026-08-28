@@ -25,7 +25,7 @@
 	"markdown-pdf.breaks": true,
 	"markdown-pdf.convertOnSave": true,
 	"markdown-pdf.convertOnSaveExclude": [
-			// "^(?!-manual.md$).+$"
+			"^(?!-manual.md$).+$"
 	],
 	"markdown-pdf.displayHeaderFooter": true,
 	"markdown-pdf.outputDirectory": "./manuals/",

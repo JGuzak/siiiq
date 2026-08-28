@@ -69,22 +69,22 @@ iiiano is a USB MIDI keyboard script for Monome Grid devices that transforms you
 
 The Grid One interface is divided into three main regions.
 
-| Keybed                                     | Layer                                    | Layer Select                                           |
-| ------------------------------------------ | ---------------------------------------- | ------------------------------------------------------ |
+| Keybed                                                | Layer                                               | Layer Select                                                      |
+| ----------------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------- |
 | ![keybed region](../images/piiiano/region_keybed.png) | ![layer region](../images/piiiano/region_layer.png) | ![layer select region](../images/piiiano/region_layer_select.png) |
 
 Grid Zeros don't have layer selection because all layers are visible on the top half of the device.
 
-| Keybed                                          | Performance Layer                                                     | Keybed Layer                                                | MIDI Layer                                              |
-| ----------------------------------------------- | --------------------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------- |
+| Keybed                                                     | Performance Layer                                                                | Keybed Layer                                                           | MIDI Layer                                                         |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | ![keybed region](../images/piiiano/region_keybed_zero.png) | ![performance layer region](../images/piiiano/region_performance_layer_zero.png) | ![keybed layer region](../images/piiiano/region_keybed_layer_zero.png) | ![MIDI layer region](../images/piiiano/region_midi_layer_zero.png) |
 
 ## Keybed
 
 The keybed provides a grid-based interface for playing notes with visual feedback.
 
-| Grid One                                                         | Grid Zero                                                          |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Grid One                                                    | Grid Zero                                                             |
+| ----------------------------------------------------------- | --------------------------------------------------------------------- |
 | ![Grid One: Keybed UI](../images/piiiano/keybed_ui_one.png) | ![Grid Zero: Performance Layer](../images/piiiano/keybed_ui_zero.png) |
 
 - **Root Note Highlighting**: Root notes appear at maximum brightness
@@ -102,8 +102,8 @@ The layer selection zone contains three main layers accessible via the top row.
 
 ## Performance Layer
 
-| Grid One                                                         | Grid Zero                                                          |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Grid One                                                                    | Grid Zero                                                                     |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | ![Grid One: Performance Layer](../images/piiiano/performance_layer_one.png) | ![Grid Zero: Performance Layer](../images/piiiano/performance_layer_zero.png) |
 
 *Only on Grid One:* Access the Performance Layer by pressing `13A`.
@@ -147,8 +147,8 @@ Hold either `Min` or `Max` velocity select buttons and tap a pad from the 16 vel
 
 ## Keybed Layer
 
-| Grid One                                               | Grid Zero                                                |
-| ------------------------------------------------------ | -------------------------------------------------------- |
+| Grid One                                                          | Grid Zero                                                |
+| ----------------------------------------------------------------- | -------------------------------------------------------- |
 | ![Grid One: Keybed Layer](../images/piiiano/keybed_layer_one.png) | ![Grid Zero: Keybed Layer](images)/keybed_layer_zero.png |
 
 *Only on Grid One:* Access the Keybed Edit Layer by pressing the button at position `15A`.
@@ -180,14 +180,14 @@ Rows `E` through `G` set the root note of the keybed.
 
 Row `H` sets the row offset of the keybed.
 
-| Octave                                                   | 3rds                                                 | 4ths                                                 |
-| -------------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------- |
+| Octave                                                              | 3rds                                                            | 4ths                                                            |
+| ------------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
 | ![Offset Octave Sprite](../images/piiiano/offset_octave_sprite.png) | ![Offset 3rds Sprite](../images/piiiano/offset_3rds_sprite.png) | ![Offset 4ths Sprite](../images/piiiano/offset_4ths_sprite.png) |
 
 ## MIDI Layer
 
-| Grid One                                           | Grid Zero                                            |
-| -------------------------------------------------- | ---------------------------------------------------- |
+| Grid One                                                      | Grid Zero                                            |
+| ------------------------------------------------------------- | ---------------------------------------------------- |
 | ![Grid One: MIDI Layer](../images/piiiano/midi_layer_one.png) | ![Grid Zero: MIDI Layer](images)/midi_layer_zero.png |
 
 *Only on Grid One:* Access the MIDI Layer by pressing the button at position `16A`.

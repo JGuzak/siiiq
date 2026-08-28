@@ -14,7 +14,7 @@ A collection of instrument and sequencer scripts for iii devices.
 ## Installation
 
 > [!CAUTION]
-> Make sure to follow [First Time Setup](#first-time-setup) steps before attempting to install.
+> Make sure to follow [First Time Setup](#first-time-setup) steps before attempting to install any scripts.
 
 **VS Code Steps:**
 
@@ -42,9 +42,7 @@ diii -c
 diii -u ./arc/<script name>.lua
 ```
 
-> [!NOTE] It is good practice to clear any active iii scripts before installing a new one.
-> If a larger script is already running while attempting to upload a new script, the upload
-> can fail.
+> [!NOTE] It is good practice to clear any active iii scripts before installing a new one. If a larger script is already running while attempting to upload a new script, the upload can fail.
 
 ## First time setup
 

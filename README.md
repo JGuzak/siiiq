@@ -2,14 +2,26 @@
 
 A collection of instrument and sequencer scripts for iii devices.
 
+- [Scripts](#scripts)
 - [Installation](#installation)
 - [First time setup](#first-time-setup)
-- [Scripts](#scripts)
 - [Troubleshooting](#troubleshooting)
   - [Flip Device Mode](#flip-device-mode)
   - [DeviceNotFoundError(f"can't find iii device")](#devicenotfounderrorfcant-find-iii-device)
   - [Uploading script gets stuck on "-- receiving script" step](#uploading-script-gets-stuck-on----receiving-script-step)
 - [Credits](#credits)
+
+## Scripts
+
+| Name                                                              | Compatable Devices  | Type       | Description                             |
+| ----------------------------------------------------------------- | ------------------- | ---------- | --------------------------------------- |
+| [Piiiano](./manuals/piiiano-manual.pdf)                           | Grid (Zero and One) | Instrument | Grid based chromatic midi keyboard      |
+| [Iiimpact](./manuals/iiimpact-manual.pdf)                         | Grid (Zero and One) | Instrument | Drum pad midi instrument                |
+| [Fadiiir](./manuals/fadiiir-manual.pdf)                           | Grid (Zero and One) | Controller | 16 configurable virtual faders          |
+| [Percusiiions](./manuals/percusiiions-manual.pdf)                 | Grid (Zero and One) | Sequencer  | Simple 16 step, 8 track, step sequencer |
+| [Melodiiies](./manuals/melodiiies-manual.pdf)                     | Grid (Zero and One) | Sequencer  | Scale aware polyphonic step sequencer   |
+| [Multiii Body Problem](./manuals/multiii-body-problem-manual.pdf) | Arc                 | Sequencer  | Scale aware polyphonic step sequencer   |
+
 
 ## Installation
 
@@ -87,17 +99,6 @@ source .venv/Scripts/activate && diii
 ```
 
 To exit `diii`, type `q` into the console and press `enter`. For other `diii` commands check out the docs [here](https://github.com/monome/iii?tab=readme-ov-file#run).
-
-## Scripts
-
-| Name                                                              | Compatable Devices  | Type       | Description                             |
-| ----------------------------------------------------------------- | ------------------- | ---------- | --------------------------------------- |
-| [Piiiano](./manuals/piiiano-manual.pdf)                           | Grid (Zero and One) | Instrument | Grid based chromatic midi keyboard      |
-| [Iiimpact](./manuals/iiimpact-manual.pdf)                         | Grid (Zero and One) | Instrument | Drum pad midi instrument                |
-| [Fadiiir](./manuals/fadiiir-manual.pdf)                           | Grid (Zero and One) | Controller | 16 configurable virtual faders          |
-| [Percusiiions](./manuals/percusiiions-manual.pdf)                 | Grid (Zero and One) | Sequencer  | Simple 16 step, 8 track, step sequencer |
-| [Melodiiies](./manuals/melodiiies-manual.pdf)                     | Grid (Zero and One) | Sequencer  | Scale aware polyphonic step sequencer   |
-| [Multiii Body Problem](./manuals/multiii-body-problem-manual.pdf) | Arc                 | Sequencer  | Scale aware polyphonic step sequencer   |
 
 ## Troubleshooting
 

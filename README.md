@@ -94,7 +94,7 @@ To exit `diii`, type `q` into the console and press `enter`. For other `diii` co
 | ----------------------------------------------------------------- | ------------------- | ---------- | --------------------------------------- |
 | [Piiiano](./manuals/piiiano-manual.pdf)                           | Grid (Zero and One) | Instrument | Grid based chromatic midi keyboard      |
 | [Iiimpact](./manuals/iiimpact-manual.pdf)                         | Grid (Zero and One) | Instrument | Drum pad midi instrument                |
-| [Fadiiir](./manuals/fadiiir-manual.pdf)                           | Grid (Zero and One) | Controller | 16 virtual MIDI CC faders               |
+| [Fadiiir](./manuals/fadiiir-manual.pdf)                           | Grid (Zero and One) | Controller | 16 configurable virtual faders          |
 | [Percusiiions](./manuals/percusiiions-manual.pdf)                 | Grid (Zero and One) | Sequencer  | Simple 16 step, 8 track, step sequencer |
 | [Melodiiies](./manuals/melodiiies-manual.pdf)                     | Grid (Zero and One) | Sequencer  | Scale aware polyphonic step sequencer   |
 | [Multiii Body Problem](./manuals/multiii-body-problem-manual.pdf) | Arc                 | Sequencer  | Scale aware polyphonic step sequencer   |

@@ -53,11 +53,11 @@ There are two ways to set up your local copy of this project. **The fastest and 
 Start by installing [VS Code](https://code.visualstudio.com/) from the official web page (Always check the url).
 
 1. Install [python 3.11](https://www.python.org/downloads/release/python-31113/) (last tested with `3.11.13`)
-2. Run the setup script
+2. Run the setup script via one of the following methods:
 
 **VS Code:**
 
-`ctrl+shift+p` type `run task` and select `Setup Environment`
+Run the setup enviornment task: `ctrl+shift+p` type `run task` and select `Setup Environment`
 
 **Terminal:**
 
@@ -73,28 +73,22 @@ Launch `diii` with one of the following methods, you should see a console simila
 
 ![diii console image](images/diii_console.png)
 
-To exit `diii`, type `q` into the console and press `enter`. For other `diii` commands check out the docs [here](https://github.com/monome/iii?tab=readme-ov-file#run).
+**VS Code:**
 
-***VS Code***
+1. Run the Launch diii task: `ctrl+shift+p` type `run task` and select `Launch diii`
+2. Terminal: Open a new terminal in VS Code and run `diii`
 
-- Task: `ctrl+shift+p` type `run task` and select `Launch diii`
-- Terminal: Open a new terminal in VS Code and run `diii`
-
-***Terminal***
-
-*Windows*
-
-```powershell
-./.venv/Scripts/activate.ps1; diii
-```
-
-*Linux/MacOS*
+**Terminal:**
 
 ```bash
+# Windows (PowerShell):
+./.venv/Scripts/activate.ps1; diii
+
+# Linux/MacOS (Bash):
 source .venv/Scripts/activate && diii
 ```
 
-If you want to jump right into the business, go to [the next section](#quick-flash).
+To exit `diii`, type `q` into the console and press `enter`. For other `diii` commands check out the docs [here](https://github.com/monome/iii?tab=readme-ov-file#run).
 
 ## Scripts
 

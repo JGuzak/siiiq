@@ -1,4 +1,26 @@
 {
+	"terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			"path": "powershell.exe",
+			"args": [
+				"-NoExit",
+				"-ExecutionPolicy", "Bypass",
+				"-File", "${workspaceFolder}\\.venv\\Scripts\\Activate.ps1"
+			]
+		},
+	},
+	"terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.osx": {
+    "Bash": {
+      "path": "bash",
+      "args": [
+				"--no-rcs",
+				"-c",
+				"source ~/.bashrc; source ${workspaceFolder}/.venv/Scripts/activate"
+			]
+    }
+  },
+  "terminal.integrated.defaultProfile.osx": "Bash",
 	"Lua.diagnostics.globals": [
 		"grid_size_x",
 		"grid_size_y",

@@ -1,9 +1,9 @@
 <h1>Piiiano Manual</h1>
 
 - [Abstract](#abstract)
+- [Features](#features)
+- [Idea Brainstorm](#idea-brainstorm)
 - [Technical Specifications](#technical-specifications)
-- [Prerequisites \& Installation](#prerequisites--installation)
-- [How to Install](#how-to-install)
 - [Interface Regions](#interface-regions)
 - [Keybed](#keybed)
 - [Layer Selection](#layer-selection)
@@ -23,6 +23,37 @@ iiiano is a USB MIDI keyboard script for Monome Grid devices that transforms you
 
 [![iiiano Tutorial Video](../images/piiiano/video_thumbnail.png)](https://www.youtube.com/watch?v=VIDEO_ID_PLACEHOLDER)
 
+## Features
+
+- 8 x 12 keybed (On One), 8 x 16 keybed (On Zero)
+- ±2 Octave transpose
+- 16 velocities
+  - Selected note brightness matches velocity
+- Note hold toggle
+- Selectable root note
+- Selectable scale
+- Keybed layout modes
+  - Octave
+  - 3rds
+  - 4ths
+- Selectable MIDI output channel
+- MIDI PANIC button
+
+## Idea Brainstorm
+
+- In Key toggle
+- ~~Rotatable keyboard~~
+- Adjustable velocity
+  - Random velocity with range control and randomness distribution adjustment?
+  - Hold Select minimum/maximum button and press one of the 16 velocities
+  - Velocity mode button toggles between static velocity and random velocity
+- Note Hold modes
+  - ?Sostenuto? - Like damper but only occurs for notes that were pressed while sostenuto button is held. Not sure if this would fit into the grid UI :/
+- MIDI note input light up keybed
+- Zero support
+  - Show all layers at the same time across the top half and extend keybed all the way across the bottom half
+- Split MIDI channel keybed
+
 ## Technical Specifications
 
 - **Grid Compatibility**: Monome Grid One (8x16) and Zero (16x16)
@@ -33,20 +64,6 @@ iiiano is a USB MIDI keyboard script for Monome Grid devices that transforms you
 - **Root Note**: Configurable root note
 - **Scales**: 10 predefined scales
 - **Layout Modes**: 3 different keybed arrangements
-
-## Prerequisites & Installation
-
-***Hardware Requirements***
-
-- Monome Grid One or Zero
-- iii firmware version 250114 or newer
-- Python 3.11
-
-## How to Install
-
-1. Run `diii` from your commandline of choice. You can reference [dii docs](https://github.com/monome/diii) for more information installing.
-2. Run `^^c` to clear the currently installed script *!This step is important, there is a bug causing issues flashing without a clear first!*
-3. Run `u iiiano.lua` to upload the script
 
 ## Interface Regions
 

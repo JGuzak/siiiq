@@ -56,24 +56,6 @@
       }
     },
     {
-      "label": "Flash iiiano",
-      "type": "shell",
-      "windows": {
-        "command": ".\\.venv\\Scripts\\Activate.ps1; diii upload iiiano.lua"
-      },
-      "osx": {
-        "command": "source .venv/bin/activate && diii upload iiiano.lua"
-      },
-      "linux": {
-        "command": "source .venv/bin/activate && diii upload iiiano.lua"
-      },
-      "problemMatcher": [],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
-    },
-    {
       "label": "Lock Dependencies",
       "type": "shell",
       "windows": {

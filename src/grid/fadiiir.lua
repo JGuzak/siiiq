@@ -6,7 +6,7 @@ local MAX_BRIGHTNESS = 15
 local NUM_ACCESS_BUTTONS = 4
 local menu_access_buttons_held=0
 local last_menu_button_press_time=nil
-local single_layer="settings"
+local single_page="settings"
 local selected_fader=1
 local fader_pos = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 
@@ -14,13 +14,14 @@ function init()
 	render_grid()
 end
 
-function toggle_layer()
-	if single_layer == "faders" then
-		single_layer="settings"
+function toggle_page()
+	if single_page == "faders" then
+		single_page="settings"
 	else
-		single_layer="faders"
+		single_page="faders"
 	end
 end
+
 function handle_menu_access_button_press(z)
 	if z==1 then
 		if last_menu_button_press_time ==nil then
@@ -44,7 +45,7 @@ function grid(x,y,z)
 
 		if menu_access_buttons_held==NUM_ACCESS_BUTTONS then
 			if z==1 then
-				toggle_layer()
+				toggle_page()
 			end
 		end
 	end
@@ -55,7 +56,7 @@ function grid(x,y,z)
 	render_grid()
 end
 
-function render_layer(y_offset, layer)
+function render_page(y_offset, layer)
 	if layer == "settings" then
 		for x=1, MAX_X do
 			local brightness = 0
@@ -70,10 +71,10 @@ function render_layer(y_offset, layer)
 end
 function render_grid()
 	if GRID_VARIANT == "One" then
-		render_layer(GRID_VERTICAL_OFFSET, single_layer)
+		render_page(GRID_VERTICAL_OFFSET, single_page)
 	elseif GRID_VARIANT == "Zero" then
-		render_layer(GRID_VERTICAL_OFFSET, "settings")
-		render_layer(0, "faders")
+		render_page(GRID_VERTICAL_OFFSET, "settings")
+		render_page(0, "faders")
 	end
 	grid_refresh()
 end

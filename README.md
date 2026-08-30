@@ -4,7 +4,10 @@ A collection of instrument and sequencer scripts for iii devices.
 
 - [Scripts](#scripts)
 - [Installation](#installation)
-- [First time setup](#first-time-setup)
+- [Running diii locally](#running-diii-locally)
+  - [Install diii](#install-diii)
+  - [Launch diii](#launch-diii)
+  - [Installing scripts locally](#installing-scripts-locally)
 - [Troubleshooting](#troubleshooting)
   - [Flip Device Mode](#flip-device-mode)
   - [DeviceNotFoundError(f"can't find iii device")](#devicenotfounderrorfcant-find-iii-device)
@@ -22,64 +25,28 @@ A collection of instrument and sequencer scripts for iii devices.
 | [Melodiiies](./manuals/melodiiies-manual.pdf)                     | Grid (Zero and One) | Sequencer  | Scale aware polyphonic step sequencer   |
 | [Multiii Body Problem](./manuals/multiii-body-problem-manual.pdf) | Arc                 | Sequencer  | Scale aware polyphonic step sequencer   |
 
-
 ## Installation
 
-> [!CAUTION]
-> Make sure to follow [First Time Setup](#first-time-setup) steps before attempting to install any scripts.
+> [!NOTE] Make sure your iii device is running the latest firmware! Updating firmware can be done via the diii browser tool linked below.
 
-**VS Code Steps:**
-
-1. Open this folder in VS Code
-2. Run launch diii Task: `ctrl+shift+p` type `run task` and select `Launch diii`
-3. Connect your iii enabled `Arc` or `Grid` (Zero/One)
-
-**Command Line Steps:**
-
-1. Choose a script to install from the [Scripts](#scripts) section.
-2. Connect your iii enabled `Arc` or `Grid` (Zero/One)
-3. Open your terminal of choice and run the following commands:
-
-**Grid:**
-
-```bash
-diii -c
-diii -u ./grid/<script name>.lua
-```
-
-**Arc:**
-
-```bash
-diii -c
-diii -u ./arc/<script name>.lua
-```
+1. Open [`https://monome.org/diii/`](https://monome.org/diii/) in your browser
+2. Connect your iii device
+3. Click `Connect` to link your iii device. *Make sure it is in iii mode, not the regular serial mode!*
+4. Click `Upload` and select the script of choice from your computer.
 
 > [!NOTE] It is good practice to clear any active iii scripts before installing a new one. If a larger script is already running while attempting to upload a new script, the upload can fail.
 
-## First time setup
+## Running diii locally
 
-There are two ways to set up your local copy of this project. **The fastest and simplest way is through the included `VS Code` tasks.** If you just want it to work or are not comfortable with command line things, this is the easiest and fastest way down the mountain.
+This is an alternative to using [`https://monome.org/diii/`](https://monome.org/diii/) in your browser. This method is mostly for development purposes, it is not recommended for most users.
 
-Start by installing [VS Code](https://code.visualstudio.com/) from the official web page (Always check the url).
+### Install diii
 
-1. Install [python 3.11](https://www.python.org/downloads/release/python-31113/) (last tested with `3.11.13`)
-2. Run the setup script via one of the following methods:
+Based on steps outlined in the monome [diii cli install docs](https://monome.org/docs/iii/diii-cli/).
 
-**VS Code:**
+1. Install [uv](https://docs.astral.sh/uv/#installation).
 
-Run the setup enviornment task: `ctrl+shift+p` type `run task` and select `Setup Environment`
-
-**Terminal:**
-
-```bash
-# Windows (PowerShell):
-./scripts/setup-diii.ps1
-
-# Linux/MacOS (Bash):
-source scripts/setup-diii.sh
-```
-
-Launch `diii` with one of the following methods, you should see a console similar to the image below:
+### Launch diii
 
 ![diii console image](images/diii_console.png)
 
@@ -99,6 +66,27 @@ source .venv/Scripts/activate && diii
 ```
 
 To exit `diii`, type `q` into the console and press `enter`. For other `diii` commands check out the docs [here](https://github.com/monome/iii?tab=readme-ov-file#run).
+
+### Installing scripts locally
+
+**VS Code Steps:**
+
+1. Open this folder in VS Code
+2. Run launch diii Task: `ctrl+shift+p` type `run task` and select `Launch diii`
+3. Connect your iii enabled `Arc` or `Grid` (Zero/One)
+4. Run the commands below
+
+**Command Line Steps:**
+
+1. Choose a script to install from the [Scripts](#scripts) section.
+2. Launch `diii` *[see this for more details](#launch-diii).*
+3. Connect your iii enabled `Arc` or `Grid` (Zero/One)
+4. Open your terminal of choice and run the following commands:
+
+```bash
+^^clear
+^^upload <path to the script>
+```
 
 ## Troubleshooting
 

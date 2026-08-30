@@ -36,36 +36,39 @@
 	],
 	"markdownlint.run": "onSave",
 	"markdownlint.configFile": ".markdownlint.json",
-	"terminal.integrated.profiles.windows": {
-		"PowerShell": {
-			"path": "powershell.exe",
-			"args": [
-				"-NoExit",
-				"-ExecutionPolicy",
-				"Bypass",
-				"-File",
-				"${workspaceFolder}\\.venv\\Scripts\\Activate.ps1"
-			]
-		},
-		"GitBash": {
-			"path": "C:\\Program Files\\Git\\bin\\bash.exe",
-			"args": [
-				"--rcfile",
-				"${workspaceFolder}/.venv/Scripts/activate.sh",
-				"-i"
-			]
-		}
-	},
-	"terminal.integrated.defaultProfile.windows": "PowerShell",
-	"terminal.integrated.profiles.osx": {
-		"Bash": {
-			"path": "bash",
-			"args": [
-				"--no-rcs",
-				"-c",
-				"source ~/.bashrc; source ${workspaceFolder}/.venv/Scripts/activate"
-			]
-		}
-	},
-	"terminal.integrated.defaultProfile.osx": "Bash",
+	"cSpell.words": [
+		"linlin"
+	],
+	// "terminal.integrated.profiles.windows": {
+	// 	"PowerShell": {
+	// 		"path": "powershell.exe",
+	// 		"args": [
+	// 			"-NoExit",
+	// 			"-ExecutionPolicy",
+	// 			"Bypass",
+	// 			"-File",
+	// 			"${workspaceFolder}\\.venv\\Scripts\\Activate.ps1"
+	// 		]
+	// 	},
+	// 	"GitBash": {
+	// 		"path": "C:\\Program Files\\Git\\bin\\bash.exe",
+	// 		"args": [
+	// 			"--rcfile",
+	// 			"${workspaceFolder}/.venv/Scripts/activate.sh",
+	// 			"-i"
+	// 		]
+	// 	}
+	// },
+	// "terminal.integrated.defaultProfile.windows": "PowerShell",
+	// "terminal.integrated.profiles.osx": {
+	// 	"Bash": {
+	// 		"path": "bash",
+	// 		"args": [
+	// 			"--no-rcs",
+	// 			"-c",
+	// 			"source ~/.bashrc; source ${workspaceFolder}/.venv/Scripts/activate"
+	// 		]
+	// 	}
+	// },
+	// "terminal.integrated.defaultProfile.osx": "Bash",
 }

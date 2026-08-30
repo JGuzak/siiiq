@@ -9,8 +9,7 @@ local last_menu_button_press_time=nil
 local single_page="faders"
 local selected_fader=1
 
-
--- Track when a button is pressed down vs when it is released
+-- Track when a button is pressed down vs when it is released (?)
 local last_button = { 1, 1 }
 local last_button_press_time = nil
 local MIN_HOLD_TIME = 1.0
@@ -50,17 +49,6 @@ function handle_track_select_button_press(x)
 end
 
 function handle_fader_position_change(x,y, y_offset, z)
-	-- TODO: Make the button interaction more fun with slews
-
-	-- Button press and hold should trigger a continuous slew at a fast, slow,
-	-- or instant rate.
-
-	-- Alternatively, whatever button is held should be the target point of the slew,
-	-- once pad is released, the slew should stop.
-	-- Double tap middle, bottom, and top pads should instantaneously jump to middle,
-	-- bottom, or top values.
-	-- This will be easier to implement vs the first option.
-
 	-- Naive way to do this, hard value jumps:
 	-- 1 Set to Max
 	-- 2 Large step increase by static amount
@@ -85,6 +73,9 @@ function handle_fader_position_change(x,y, y_offset, z)
 		fader_pos[x] = 0.0
 	end
 
+end
+
+function handle_fader_press()
 end
 
 function event_grid(x,y,z)
@@ -126,10 +117,6 @@ function event_grid(x,y,z)
 	render_grid()
 end
 
-function scale_fader_led_position(raw_fader_pos)
-	return round()
-end
-
 function render_fader_position(fader_index, y_offset)
 	-- fader position leds are 7 pads tall
 	for i = 1, 7 do
@@ -166,6 +153,10 @@ function render_fader_position(fader_index, y_offset)
 	-- 	grid_led(fader_index, round(scaled_position, 1), MAX_BRIGHTNESS)
 	-- end
 	-- print("middle_y: " .. middle_y .. " remainder: " .. remainder)
+end
+
+function render_settings_page()
+	-- TODO: Write this
 end
 
 function render_fader_select_bar(y_pos)

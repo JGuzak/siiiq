@@ -1,12 +1,14 @@
 local MAX_X=grid_size_x()
 local MAX_Y=grid_size_y()
+local HALF_X=MAX_X/2
+local HALF_Y=MAX_Y/2
 local GRID_VARIANT=(MAX_Y==16 and MAX_X==16) and "Zero" or (MAX_Y==8 and MAX_X==16) and "One"
 local GRID_VERTICAL_OFFSET=(GRID_VARIANT=="Zero") and 8 or 0
 local MAX_BRIGHTNESS = 15
 local NUM_ACCESS_BUTTONS = 4
 local menu_access_buttons_held=0
 local last_menu_button_press_time=nil
-local single_page="faders"
+local single_page="slide"
 local selected_fader=1
 
 -- Track when a button is pressed down vs when it is released (?)
@@ -14,18 +16,21 @@ local last_button = { 1, 1 }
 local last_button_press_time = nil
 local MIN_HOLD_TIME = 1.0
 
+local SLEW_SPEED = 0.5
+
 -- Fader positions are 0.0 to 1.0 and should be scaled to MIDI CC ranges/LED positions.
-local fader_pos = {0.5, 0.55, 0.56, 0.57, 0.58, 0.6, 0.8, 0.6, 0.4, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}
+local fader_pos = {0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.4, 0.3, 0.2, 0.1, 0.0}
+local fader_slew_ids = {nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil}
 
 function init()
 	render_grid()
 end
 
 function toggle_page()
-	if single_page == "faders" then
+	if single_page == "slide" then
 		single_page="settings"
 	else
-		single_page="faders"
+		single_page="slide"
 	end
 end
 
@@ -44,11 +49,13 @@ function handle_menu_access_button_press(z)
 	end
 end
 
-function handle_track_select_button_press(x)
- selected_fader = clamp(x, 0, MAX_X)
+function handle_track_select_button_press(x, z)
+	if z == 1 then
+		selected_fader = clamp(x, 0, MAX_X)
+	end
 end
 
-function handle_fader_position_change(x,y, y_offset, z)
+function handle_fader_tune_press(x, y, z)
 	-- Naive way to do this, hard value jumps:
 	-- 1 Set to Max
 	-- 2 Large step increase by static amount
@@ -60,39 +67,17 @@ function handle_fader_position_change(x,y, y_offset, z)
 	if y == 1 then
 		fader_pos[x] = 1.0
 	elseif y == 2 then
-		fader_pos[x] = clamp(fader_pos[x] + 0.1, 0.0, 1.0)
+		fader_pos[x] = clamp(fader_pos[x] + 0.04, 0.0, 1.0)
 	elseif y == 3 then
-		fader_pos[x] = clamp(fader_pos[x] + 0.05, 0.0, 1.0)
+		fader_pos[x] = clamp(fader_pos[x] + 0.025, 0.0, 1.0)
 	elseif y == 4 then
 		fader_pos[x] = 0.5
 	elseif y == 5 then
-		fader_pos[x] = clamp(fader_pos[x] - 0.05, 0.0, 1.0)
+		fader_pos[x] = clamp(fader_pos[x] - 0.025, 0.0, 1.0)
 	elseif y == 6 then
-		fader_pos[x] = clamp(fader_pos[x] - 0.1, 0.0, 1.0)
+		fader_pos[x] = clamp(fader_pos[x] - 0.04, 0.0, 1.0)
 	elseif y == 7 then
 		fader_pos[x] = 0.0
-	end
-
-end
-
-function handle_fader_press()
-end
-
-function event_grid(x,y,z)
-	if GRID_VARIANT == "One" then
-		if y==MAX_Y then
-			handle_menu_access_button_press(z)
-			if z == 1 then
-				handle_track_select_button_press(x)
-			end
-		else
-			handle_fader_position_change(x, y, 0, z)
-		end
-		if menu_access_buttons_held==NUM_ACCESS_BUTTONS then
-			if z==1 then
-				toggle_page()
-			end
-		end
 	end
 
 	-- TODO: Fix this
@@ -113,11 +98,99 @@ function event_grid(x,y,z)
 	-- 	print("new position: " .. new_pos)
 	-- 	print("x: " .. x .. " y: " .. y .. " z: " .. z .. " fader position: " .. fader_pos[x])
 	-- end
+end
+
+function handle_fader_slide_press(x, y, z)
+	-- When a button is pressed, that becomes the slew endpoint
+	-- The slew continues until the button is released or it hits the end position
+	-- Pressing two values on a fader will move the target position to the middle between the pressed pads.
+
+	new_pos = 0.8
+
+	if z == 1 then
+		if fader_slew_ids[x] == nil then
+			fader_slew_ids[x] = slew.new(function () end, fader_pos[x], new_pos, SLEW_SPEED, 1)
+		else
+	
+		end
+		
+	else
+		slew.stop(fader_slew_ids[x])
+		fader_slew_ids[x] = nil
+	end
+end
+
+function handle_fader_settings_press(x, y, z)
+	-- TODO: Implement this later
+end
+
+function event_grid(x, y, z)
+	print("x: " .. x .. " y: " .. y .. " z: " .. z)
+	if GRID_VARIANT == "One" then
+		if y == MAX_Y then
+			handle_menu_access_button_press(z)
+			handle_track_select_button_press(x, z)
+		else
+			handle_fader_slide_press(x, y, z)
+			-- handle_fader_tune_press(x, y, z)
+		end
+		if menu_access_buttons_held==NUM_ACCESS_BUTTONS then
+			if z==1 then
+				toggle_page()
+			end
+		end
+	elseif GRID_VARIANT == "Zero" then
+		if y >= HALF_Y and y <= HALF_Y + 1 then
+			handle_menu_access_button_press(z)
+			handle_track_select_button_press(x, z)
+		elseif y < HALF_Y then
+			handle_fader_tune_press(x, y, z)
+		else
+			handle_fader_slide_press(x, y - HALF_Y - 2, z)
+			-- handle_fader_settings_press(x, y, z)
+		end
+	end
 
 	render_grid()
 end
 
-function render_fader_position(fader_index, y_offset)
+function render_fader_slide_position(fader_index, y_offset)
+	-- fader position leds are 7 pads tall
+	for i = 1, 7 do
+		brightness = 0
+		if i == 4 then brightness = 2 end
+		grid_led(fader_index, i + y_offset, brightness)
+	end
+
+	-- Anti-alias position by adjusting pad brightness if position is between one of the 8 steps.
+	fader_position = linlin(fader_pos[fader_index], 0.0, 1.0, 7.0, 1.0) + y_offset
+
+	-- if remainder ~= 0 then
+	scaled_position = round(linlin(fader_pos[fader_index], 0.0, 1.0, 7.0, 1.0), 0.001)
+	remainder = math.fmod(scaled_position, 1)
+	middle_y = round(scaled_position - remainder, 1) + y_offset
+	-- Brightness range 15 to 5
+
+	-- TODO: Fix the scaling here. Behavior is not quite right
+	upper_brightness = round(linlin(remainder, 0.0, 1.0, 7.0, 0.0), 1)
+	middle_brightness = round(linlin(remainder, 0.0, 1.0, 15.0, 0.0), 1)
+	lower_brightness = round(linlin(remainder, 0.0, 1.0, 0.0, 7.0), 1)
+	
+	print("fader: " .. fader_index .. " up: " .. upper_brightness .. " mid: " .. middle_brightness .. " low: " .. lower_brightness)
+	
+	-- Grid is oriented upside down. Top row is index 1
+	if fader_position > 2 + y_offset then
+		-- Lower pad brightness
+		grid_led(fader_index, middle_y + 1, lower_brightness)
+	end
+	if fader_position < 6 + y_offset then
+		-- Upper pad brightness
+		grid_led(fader_index, middle_y - 1, upper_brightness)
+	end
+	grid_led(fader_index, middle_y, middle_brightness)
+end
+
+function render_fader_tune_position(fader_index, y_offset)
 	-- fader position leds are 7 pads tall
 	for i = 1, 7 do
 		brightness = 0
@@ -126,37 +199,18 @@ function render_fader_position(fader_index, y_offset)
 	end
 
 	-- Aliased position
-	fader_position = round(linlin(fader_pos[fader_index], 0.0, 1.0, 7.0, 1.0), 1)
+	fader_position = round(linlin(fader_pos[fader_index], 0.0, 1.0, 7.0, 1.0), 1) + y_offset
 	-- print("fader: " .. fader_index .. " position: " .. fader_position)
 	grid_led(fader_index, fader_position, MAX_BRIGHTNESS)
-
-	-- TODO: Fix this
-	-- Anti-alias position by adjusting pad brightness if position is between one of the 8 steps.
-	-- scaled_position = round(linlin(fader_pos[fader_index], 0.0, 1.0, 8.0, 1.0), 0.001)
-
-	-- remainder = math.fmod(scaled_position, 1)
-
-	-- if remainder ~= 0 then
-	-- 	-- Grid is oriented upside down. Top row is index 1
-	-- 	middle_y = round(scaled_position - remainder, 1)
-	-- 	-- upper_y = middle_y - 1
-	-- 	lower_y = middle_y + 1
-		
-	-- 	-- Brightness range 15 to 5
-	-- 	middle_brightness = round(linlin(remainder, 1.0, 0.0, 15.0, 0.0), 1)
-	-- 	lower_brightness = round(linlin(remainder, 0.0, 1.0, 15.0, 0.0), 1)
-
-	-- 	-- grid_led(fader_index, upper_y, upper_brightness)
-	-- 	grid_led(fader_index, middle_y, middle_brightness)
-	-- 	grid_led(fader_index, lower_y, lower_brightness)
-	-- else
-	-- 	grid_led(fader_index, round(scaled_position, 1), MAX_BRIGHTNESS)
-	-- end
-	-- print("middle_y: " .. middle_y .. " remainder: " .. remainder)
 end
 
-function render_settings_page()
+function render_settings_page(y_offset)
 	-- TODO: Write this
+	for x=1, MAX_X do
+		for y= y_offset, 8 + y_offset do
+			grid_led(x, y, 1)
+		end
+	end
 end
 
 function render_fader_select_bar(y_pos)
@@ -173,22 +227,14 @@ end
 
 function render_page(y_offset, name)
 	if name == "settings" then
-		-- for x=1, MAX_X do
-		-- 	local brightness = 0
-		-- 	if x == selected_fader then
-		-- 		brightness = MAX_BRIGHTNESS
-		-- 	end
-		-- 	grid_led(x,8+y_offset,brightness)
-		-- end
-		for x=1, MAX_X do
-			for y=1, 8 + y_offset - 1 do
-				grid_led(x, y, 4)
-			end
-		end
-	elseif name == "faders" then
+		render_settings_page(y_offset)
+	elseif name == "slide" then
 		for fader = 1, MAX_X do
-			-- Calculate each fader position
-			render_fader_position(fader, y_offset)
+			render_fader_slide_position(fader, y_offset)
+		end
+	elseif name == "tune" then
+		for fader = 1, MAX_X do
+			render_fader_tune_position(fader, y_offset)
 		end
 	end
 end
@@ -199,10 +245,10 @@ function render_grid()
 		render_fader_select_bar(MAX_Y)
 		render_page(GRID_VERTICAL_OFFSET, single_page)
 	elseif GRID_VARIANT == "Zero" then
-		-- render_page(0, "faders")
-		-- render_fader_select_bar(8)
-		-- render_fader_select_bar(9)
-		-- render_page(GRID_VERTICAL_OFFSET, "settings")
+		-- render_page(0, "tune")
+		render_fader_select_bar(HALF_Y)
+		render_fader_select_bar(HALF_Y + 1)
+		render_page(GRID_VERTICAL_OFFSET + 1, "slide")
 	end
 	grid_refresh()
 end
